@@ -159,7 +159,7 @@
             'RuntimeLibrary': '<(msvc_runtime_library_release)',
             'BufferSecurityCheck': 'true',
             'DebugInformationFormat': '3',  # /Zi
-            'AdditionalOptions': ['/FS'],  # Force synchronous pdb writing.
+            'AdditionalOptions': ['/FS', '/arch:AVX2'],  # Force synchronous pdb writing.
           },
           'VCLinkerTool': {
             'LinkIncremental': '1',      # Disabled.
@@ -689,7 +689,7 @@
                 'inherit_from': ['dbg_base', 'x64_base'],
               },
               'Release': {
-                'inherit_from': ['dbg_base', 'x64_base'],
+                'inherit_from': ['opt_base', 'x64_base'],
               },
             },
           }, {

@@ -208,7 +208,7 @@ ION_EXTERNAL_LIB_NAMES = [
 cc_library(
     name = "ion_external_libs",
     srcs = select_build_output_files_for_ion_bazel_platform(ION_EXTERNAL_LIB_NAMES),
-    includes = ["third_party/zlib/src"],
+    includes = ["third_party/zlib"],
 )
 
 cc_library(

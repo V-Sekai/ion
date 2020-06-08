@@ -29,7 +29,7 @@ limitations under the License.
 
 #include "third_party/unzip/unzip.h"
 // unzip.h must be included before ioapi.h for types to be defined correctly.
-#include "third_party/zlib/src/contrib/minizip/ioapi.h"
+#include "third_party/zlib/contrib/minizip/ioapi.h"
 
 namespace ion {
 namespace base {

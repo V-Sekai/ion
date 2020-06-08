@@ -44,7 +44,7 @@ limitations under the License.
 #ifndef UTIL_UNZIP_UNZIP_H_
 #define UTIL_UNZIP_UNZIP_H_
 
-#include "third_party/zlib/src/contrib/minizip/unzip.h"
+#include "third_party/zlib/contrib/minizip/unzip.h"
 
 #ifdef __cplusplus
 extern "C" {
