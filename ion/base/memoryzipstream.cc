@@ -22,7 +22,7 @@ limitations under the License.
 #include "ion/base/logging.h"
 #include "ion/base/staticsafedeclare.h"
 #include "third_party/unzip/unzip.h"
-#include "third_party/zlib/src/contrib/minizip/zip.h"
+#include "third_party/zlib/contrib/minizip/zip.h"
 
 namespace ion {
 namespace base {

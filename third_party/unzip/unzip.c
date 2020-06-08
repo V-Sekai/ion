@@ -45,8 +45,8 @@ limitations under the License.
 #include <stdlib.h>
 #include <string.h>
 
-#include "third_party/zlib/src/contrib/minizip/ioapi.h"
-#include "third_party/zlib/src/contrib/minizip/unzip.c"
+#include "third_party/zlib/contrib/minizip/ioapi.h"
+#include "third_party/zlib/contrib/minizip/unzip.c"
 
 ZEXTERN voidpf ZEXPORT unzDetach(file) unzFile* file;
 {

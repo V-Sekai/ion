@@ -646,7 +646,7 @@ TEST(ConversionUtils, ExtractRedChannel) {
   std::vector<float> float_rgba_data;
   std::transform(rgba_data.begin(), rgba_data.end(),
                  std::back_inserter(float_rgba_data),
-                 [](uint8 value) { return value * (1.0 / 255.0); });
+                 [](uint8 value) { return value * (1.0f / 255.0f); });
   Image::Format float_test_formats[] = {Image::kR32f, Image::kRg32f,
                                         Image::kRgb32f, Image::kRgba32f,
                                         Image::kRgbaFloat};
@@ -745,7 +745,7 @@ TEST(ConversionUtils, LuminanceToRgb) {
           dst_formats[i] == Image::kRgbaFloat) {
         std::transform(expected_uint8.begin(), expected_uint8.end(),
                        std::back_inserter(expected_float),
-                       [](uint8 value) { return value * (1.0 / 255.0); });
+                       [](uint8 value) { return value * (1.0f / 255.0f); });
       }
 
       if (!expected_float.empty()) {
@@ -801,7 +801,7 @@ TEST(ConversionUtils, Uint8ToFloat) {
       while (expected.size() < num_src_channels * kWidth * kHeight) {
         std::transform(temp, temp + src_pattern_size,
                        std::back_inserter(expected),
-                       [](uint8 value) { return value * (1.0 / 255.0); });
+                       [](uint8 value) { return value * (1.0f / 255.0f); });
       }
       EXPECT_TRUE(
           ImageMatchesElements(*extracted, expected.data(), expected.size()));

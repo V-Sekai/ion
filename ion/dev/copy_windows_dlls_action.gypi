@@ -52,23 +52,23 @@
             '--configuration=<(config_variable_holder)',  # Passed at build time.
             '--destination=<(windows_dlls_destination_param)',
 
-            'dbg_x86:<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_version).DebugCRT/msvcr<(msvc_version)d.dll',
-            'dbg_x86:<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_version).DebugCRT/msvcp<(msvc_version)d.dll',
+            'dbg_x86:<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_redist_dir_version).DebugCRT/msvcr<(msvc_redist_dll_version)d.dll',
+            'dbg_x86:<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_redist_dir_version).DebugCRT/msvcp<(msvc_redist_dll_version)d.dll',
 
-            'opt_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT/msvcr<(msvc_version).dll',
-            'opt_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT/msvcp<(msvc_version).dll',
+            'opt_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcr<(msvc_redist_dll_version).dll',
+            'opt_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcp<(msvc_redist_dll_version).dll',
 
-            'prod_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT/msvcr<(msvc_version).dll',
-            'prod_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT/msvcp<(msvc_version).dll',
+            'prod_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcr<(msvc_redist_dll_version).dll',
+            'prod_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcp<(msvc_redist_dll_version).dll',
 
-            'dbg_x64:<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_version).DebugCRT/msvcr<(msvc_version)d.dll',
-            'dbg_x64:<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_version).DebugCRT/msvcp<(msvc_version)d.dll',
+            'dbg_x64:<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_redist_dir_version).DebugCRT/msvcr<(msvc_redist_dll_version)d.dll',
+            'dbg_x64:<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_redist_dir_version).DebugCRT/msvcp<(msvc_redist_dll_version)d.dll',
 
-            'opt_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_version).CRT/msvcr<(msvc_version).dll',
-            'opt_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_version).CRT/msvcp<(msvc_version).dll',
+            'opt_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcr<(msvc_redist_dll_version).dll',
+            'opt_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcp<(msvc_redist_dll_version).dll',
 
-            'prod_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_version).CRT/msvcr<(msvc_version).dll',
-            'prod_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_version).CRT/msvcp<(msvc_version).dll',
+            'prod_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcr<(msvc_redist_dll_version).dll',
+            'prod_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcp<(msvc_redist_dll_version).dll',
           ],
         }, { # else
           'includes': [
@@ -80,29 +80,29 @@
             '--configuration=<(config_variable_holder)',  # Passed at build time.
             '--destination=<(windows_dlls_destination_param)',
 
-            'dbg_x86:<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_version).DebugCRT/concrt<(msvc_version)d.dll',
-            'dbg_x86:<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_version).DebugCRT/msvcp<(msvc_version)d.dll',
-            'dbg_x86:<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_version).DebugCRT/vcruntime<(msvc_version)d.dll',
+            'dbg_x86:<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_redist_dir_version).DebugCRT/concrt<(msvc_redist_dll_version)d.dll',
+            'dbg_x86:<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_redist_dir_version).DebugCRT/msvcp<(msvc_redist_dll_version)d.dll',
+            'dbg_x86:<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_redist_dir_version).DebugCRT/vcruntime<(msvc_redist_dll_version)d.dll',
 
-            'opt_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT/concrt<(msvc_version).dll',
-            'opt_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT/msvcp<(msvc_version).dll',
-            'opt_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT/vcruntime<(msvc_version).dll',
+            'opt_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT/concrt<(msvc_redist_dll_version).dll',
+            'opt_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcp<(msvc_redist_dll_version).dll',
+            'opt_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT/vcruntime<(msvc_redist_dll_version).dll',
 
-            'prod_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT/concrt<(msvc_version).dll',
-            'prod_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT/msvcp<(msvc_version).dll',
-            'prod_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT/vcruntime<(msvc_version).dll',
+            'prod_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT/concrt<(msvc_redist_dll_version).dll',
+            'prod_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcp<(msvc_redist_dll_version).dll',
+            'prod_x86:<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT/vcruntime<(msvc_redist_dll_version).dll',
 
-            'dbg_x64:<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_version).DebugCRT/concrt<(msvc_version)d.dll',
-            'dbg_x64:<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_version).DebugCRT/msvcp<(msvc_version)d.dll',
-            'dbg_x64:<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_version).DebugCRT/vcruntime<(msvc_version)d.dll',
+            'dbg_x64:<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_redist_dir_version).DebugCRT/concrt<(msvc_redist_dll_version)d.dll',
+            'dbg_x64:<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_redist_dir_version).DebugCRT/msvcp<(msvc_redist_dll_version)d.dll',
+            'dbg_x64:<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_redist_dir_version).DebugCRT/vcruntime<(msvc_redist_dll_version)d.dll',
 
-            'opt_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_version).CRT/concrt<(msvc_version).dll',
-            'opt_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_version).CRT/msvcp<(msvc_version).dll',
-            'opt_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_version).CRT/vcruntime<(msvc_version).dll',
+            'opt_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT/concrt<(msvc_redist_dll_version).dll',
+            'opt_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcp<(msvc_redist_dll_version).dll',
+            'opt_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT/vcruntime<(msvc_redist_dll_version).dll',
 
-            'prod_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_version).CRT/concrt<(msvc_version).dll',
-            'prod_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_version).CRT/msvcp<(msvc_version).dll',
-            'prod_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_version).CRT/vcruntime<(msvc_version).dll',
+            'prod_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT/concrt<(msvc_redist_dll_version).dll',
+            'prod_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT/msvcp<(msvc_redist_dll_version).dll',
+            'prod_x64:<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT/vcruntime<(msvc_redist_dll_version).dll',
           ],
         }],
       ],  # conditions
