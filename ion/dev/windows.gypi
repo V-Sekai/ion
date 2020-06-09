@@ -70,9 +70,10 @@
     'platformsdk_dir': '<!(<(python) -c "import os; print os.getenv(\'WindowsSdkDir\') or os.path.realpath(\'<(third_party_dir)/windows_sdk_10/files\')")',
     'msvc_redist_dir': '<!(<(python) -c "import os; print os.getenv(\'VCToolsRedistDir\');")',
     'msvc_version': '<!(<(python) -c "import os; print (os.getenv(\'VisualStudioVersion\') or \'14.0\').replace(\'.\', \'\')")',
-    # In Visual Studio 2017, VisualStudioVersion is 15.0, but the redist path contains "141" and dll name "140".
-	'msvc_redist_dir_version': '<!(<(python) -c "print 141 if (<(msvc_version)==150) else <(msvc_version);")',
-	'msvc_redist_dll_version': '<!(<(python) -c "print 140 if (<(msvc_version)==150) else <(msvc_version);")',
+    # In Visual Studio (Community) 2017, VisualStudioVersion is 15.0, but the redist path contains "141" and dll name "140".
+	# In Visual Studio (Community) 2019, VisualStudioVersion is 16.0, but the redist path contains "142" and dll name "140". 
+	'msvc_redist_dir_version': '<!(<(python) -c "print 141 if (<(msvc_version)==150) else 142 if (<(msvc_version)==160) else <(msvc_version);")',
+	'msvc_redist_dll_version': '<!(<(python) -c "print 140 if (<(msvc_version)==150 or <(msvc_version)==160) else <(msvc_version);")',
   },
   'target_defaults': {
     'conditions': [
