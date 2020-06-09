@@ -1,3 +1,3 @@
 @setlocal
 
-python.exe -u %~dp0\build.py %*
+python.exe -u "%~dp0\build.py" %*
