@@ -333,7 +333,7 @@
         'link_settings': {
           'libraries': [
             '-lpthread',
-            '-lpthread_nonshared',
+            # '-lpthread_nonshared',
             '-lm',
             '-lc',
             '-lc_nonshared',
@@ -346,9 +346,9 @@
           '-fPIC',
         ],
         'cflags_cc': [
-          '-Wall',
-          '-Werror',  # Treat warnings as errors...
-          '-Wno-error=unknown-warning-option', # Except the ones we don't know about.
+          #'-Wall',
+          #'-Werror',  # Treat warnings as errors...
+          #'-Wno-error=unknown-warning-option', # Except the ones we don't know about.
           '-Wno-deprecated',
           '-Wno-unknown-pragmas',
           '-fno-exceptions',
