@@ -20,7 +20,7 @@ limitations under the License.
 #include <string>
 
 #include "base/integral_types.h"
-#include "third_party/jsoncpp/include/json/value.h"
+#include "json/value.h"
 
 TimelineEvent::TimelineEvent(const std::string& name, const uint32 begin,
                              const uint32 duration, const Json::Value& args)

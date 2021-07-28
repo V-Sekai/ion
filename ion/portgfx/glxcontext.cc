@@ -20,9 +20,6 @@ limitations under the License.
 #include <stdlib.h>
 #include <string.h>
 
-#include <GL/glx.h>
-#include <X11/Xlib.h>
-
 #include <cstring>
 #include <memory>
 #include <mutex>  // NOLINT(build/c++11)
@@ -37,6 +34,10 @@ limitations under the License.
 #include "ion/port/environment.h"
 #include "ion/portgfx/glcontext.h"
 #include "ion/portgfx/glheaders.h"
+
+#include <GL/glx.h>
+#include <X11/Xlib.h>
+
 
 // The list of X11 entry points that we'll need.
 #define ITERATE_X11_LIST(macro) \

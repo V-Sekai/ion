@@ -247,7 +247,7 @@ def BuildAssetZip(asset_file, search_paths):
       original_size /= 1024
       compressed_size /= 1024
       suffix_index += 1
-      suffix = levels[suffix_index]
+    suffix = levels[suffix_index]
 
     print ('Created ZipAsset %s: compressed %d%sB -> %d%sB (%.0f%%)' %
            (name, original_size, suffix, compressed_size, suffix,

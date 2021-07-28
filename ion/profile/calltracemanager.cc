@@ -27,7 +27,7 @@ limitations under the License.
 #include "ion/profile/timelinenode.h"
 #include "ion/profile/timelinethread.h"
 #include "ion/profile/tracerecorder.h"
-#include "third_party/jsoncpp/include/json/json.h"
+#include "json/json.h"
 
 namespace ion {
 namespace profile {

@@ -22,7 +22,7 @@ limitations under the License.
 
 #include "base/integral_types.h"
 #include "ion/profile/timelinenode.h"
-#include "third_party/jsoncpp/include/json/value.h"
+#include "json/value.h"
 
 // TimelineEvent is a node in a Timeline that corresponds to a trace event (or a
 // start/end pair of events)

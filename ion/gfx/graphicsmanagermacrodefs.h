@@ -23,7 +23,7 @@ limitations under the License.
 
 #if defined(ION_ANALYTICS_ENABLED)
 #  include "ion/profile/profiling.h"
-#  include "third_party/jsoncpp/include/json/json.h"
+#  include "json/json.h"
 #  define ION_PROFILE_GL_FUNC(name, trace)                            \
   std::ostringstream trace_ss;                                        \
   trace_ss << trace;                                                  \

@@ -49,7 +49,7 @@ limitations under the License.
 
 #include "absl/memory/memory.h"
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
-#include "third_party/jsoncpp/include/json/json.h"
+#include "json/json.h"
 
 namespace ion {
 namespace profile {

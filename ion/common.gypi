@@ -55,6 +55,7 @@
     'include_dirs' : [
       '<(ion_dir)/port/override',
       '<(root_dir)',
+      '<(root_dir)/third_party/jsoncpp/include',  # Use JSONCPP in third_party.
     ],
     'defines' : [
       'ION_GYP=1',

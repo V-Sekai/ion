@@ -31,7 +31,7 @@ limitations under the License.
 #include "ion/profile/timelinerange.h"
 #include "ion/profile/timelinescope.h"
 #include "absl/memory/memory.h"
-#include "third_party/jsoncpp/include/json/json.h"
+#include "json/json.h"
 
 namespace ion {
 namespace profile {

@@ -15,7 +15,7 @@ else
     declare -r target_root=/c/local/ion
     declare -r os_dir="win-ninja"
     declare -r lib_suffix="*.lib"
-fi    
+fi
 
 cd ${source_root}/ion
 

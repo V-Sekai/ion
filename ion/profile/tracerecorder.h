@@ -34,8 +34,8 @@ limitations under the License.
 #include "ion/port/timer.h"
 #include "ion/profile/timelineevent.h"
 #include "ion/profile/timelinenode.h"
-#include "third_party/jsoncpp/include/json/json.h"
-#include "third_party/jsoncpp/include/json/writer.h"
+#include "json/json.h"
+#include "json/writer.h"
 
 namespace ion {
 namespace profile {
