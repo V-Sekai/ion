@@ -36,6 +36,21 @@ limitations under the License.
 namespace ion {
 namespace math {
 
+namespace {
+
+  template<bool...> struct bool_pack;
+
+  template<bool... bs> 
+  using all_true = std::is_same<bool_pack<bs..., true>, bool_pack<true, bs...>>;
+
+  template<typename T, typename... Args>
+  using are_all_convertible = all_true<std::is_convertible<Args, T>::value...>;
+
+  template<typename T, typename... Args>
+  constexpr bool all_types_match = are_all_convertible<T, Args...>::value;
+
+}
+
 //-----------------------------------------------------------------------------
 // VectorBase.
 //-----------------------------------------------------------------------------
@@ -49,10 +64,9 @@ class VectorBase {
   typedef T ValueType;
 
   // Sets the vector values.
-  void Set(T e0);                    // Only when Dimension == 1.
-  void Set(T e0, T e1);              // Only when Dimension == 2.
-  void Set(T e0, T e1, T e2);        // Only when Dimension == 3.
-  void Set(T e0, T e1, T e2, T e3);  // Only when Dimension == 4.
+  template <typename... Args,
+            typename = std::enable_if_t<all_types_match<T, Args...>>>
+  void Set(T e0, Args... args);
 
   // Mutable element accessor.
   T& operator[](int index) {
@@ -112,9 +126,9 @@ class VectorBase {
   VectorBase() noexcept : elem_() {}
 
   constexpr explicit VectorBase(T e0);           // Only when Dimension == 1.
-  constexpr VectorBase(T e0, T e1);              // Only when Dimension == 2.
-  constexpr VectorBase(T e0, T e1, T e2);        // Only when Dimension == 3.
-  constexpr VectorBase(T e0, T e1, T e2, T e3);  // Only when Dimension == 4.
+  template <typename... Args,
+            typename = std::enable_if_t<all_types_match<T, Args...>>>
+  constexpr VectorBase(T e0, T e1, Args... args);
 
   // Constructor for an instance of dimension N from an instance of dimension
   // N-1 and a scalar of the correct type. This is defined only when Dimension
@@ -243,9 +257,9 @@ class Vector : public VectorBase<Dimension, T> {
 
   // Dimension-specific constructors that are passed individual element values.
   constexpr explicit Vector(T e0) : BaseType(e0) {}
-  constexpr Vector(T e0, T e1) : BaseType(e0, e1) {}
-  constexpr Vector(T e0, T e1, T e2) : BaseType(e0, e1, e2) {}
-  constexpr Vector(T e0, T e1, T e2, T e3) : BaseType(e0, e1, e2, e3) {}
+  template <typename... Args,
+            typename = std::enable_if_t<all_types_match<T, Args...>>>
+  constexpr Vector(T e0, T e1, Args... args) : BaseType(e0, e1, args...) {};
 
   // Constructor for a Vector of dimension N from a Vector of dimension N-1 and
   // a scalar of the correct type, assuming N is at least 2.
@@ -360,9 +374,9 @@ class Point : public VectorBase<Dimension, T> {
 
   // Dimension-specific constructors that are passed individual element values.
   constexpr explicit Point(T e0) : BaseType(e0) {}
-  constexpr Point(T e0, T e1) : BaseType(e0, e1) {}
-  constexpr Point(T e0, T e1, T e2) : BaseType(e0, e1, e2) {}
-  constexpr Point(T e0, T e1, T e2, T e3) : BaseType(e0, e1, e2, e3) {}
+  template <typename... Args,
+            typename = std::enable_if_t<all_types_match<T, Args...>>>
+  constexpr Point(T e0, T e1, Args... args) : BaseType(e0, e1, args...) {};
 
   // Constructor for a Point of dimension N from a Point of dimension N-1 and
   // a scalar of the correct type, assuming N is at least 2.
@@ -570,20 +584,11 @@ constexpr VectorBase<Dimension, T>::VectorBase(T e0) : elem_{e0} {
 }
 
 template <int Dimension, typename T>
-constexpr VectorBase<Dimension, T>::VectorBase(T e0, T e1) : elem_{e0, e1} {
-  static_assert(Dimension == 2, "Bad Dimension in VectorBase constructor");
-}
-
-template <int Dimension, typename T>
-constexpr VectorBase<Dimension, T>::VectorBase(T e0, T e1, T e2)
-    : elem_{e0, e1, e2} {
-  static_assert(Dimension == 3, "Bad Dimension in VectorBase constructor");
-}
-
-template <int Dimension, typename T>
-constexpr VectorBase<Dimension, T>::VectorBase(T e0, T e1, T e2, T e3)
-    : elem_{e0, e1, e2, e3} {
-  static_assert(Dimension == 4, "Bad Dimension in VectorBase constructor");
+template <typename... Args, typename>
+constexpr VectorBase<Dimension, T>::VectorBase(T e0, T e1, Args... args)
+    : elem_{e0, e1, static_cast<T>(args)...} {
+  static_assert(Dimension == sizeof...(args) + 2,
+                "Bad Dimension in VectorBase constructor");
 }
 
 template <int Dimension, typename T>
@@ -600,33 +605,14 @@ constexpr VectorBase<Dimension, T>::VectorBase(
     : VectorBase(InitCast<U>::Invoke(v)) {}
 
 template <int Dimension, typename T>
-void VectorBase<Dimension, T>::Set(T e0) {
-  static_assert(Dimension == 1, "Bad Dimension in VectorBase::Set");
-  elem_[0] = e0;
-}
-
-template <int Dimension, typename T>
-void VectorBase<Dimension, T>::Set(T e0, T e1) {
-  static_assert(Dimension == 2, "Bad Dimension in VectorBase::Set");
-  elem_[0] = e0;
-  elem_[1] = e1;
-}
-
-template <int Dimension, typename T>
-void VectorBase<Dimension, T>::Set(T e0, T e1, T e2) {
-  static_assert(Dimension == 3, "Bad Dimension in VectorBase::Set");
-  elem_[0] = e0;
-  elem_[1] = e1;
-  elem_[2] = e2;
-}
-
-template <int Dimension, typename T>
-void VectorBase<Dimension, T>::Set(T e0, T e1, T e2, T e3) {
-  static_assert(Dimension == 4, "Bad Dimension in VectorBase::Set");
-  elem_[0] = e0;
-  elem_[1] = e1;
-  elem_[2] = e2;
-  elem_[3] = e3;
+template <typename... Args, typename>
+void VectorBase<Dimension, T>::Set(T e0, Args... args) {
+  static_assert(Dimension == sizeof...(args) + 1,
+                "Bad Dimension in VectorBase::Set");
+  std::array<T, sizeof...(args) + 1> tmp = {e0, static_cast<T>(args)...};
+  for(int i = 0; i < sizeof...(args) + 1; i++) {
+    elem_[i] = tmp[i];
+  }
 }
 
 // Specializations to help with static functions.

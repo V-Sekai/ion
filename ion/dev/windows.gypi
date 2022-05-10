@@ -18,29 +18,30 @@
 {
   'variables' : {
     'variables': {
-      'windows_sdk_version': '10.0.10586.0',
-      'windows_path_dirs_x86': [
-        '<(msvc_dir)/vc/bin',
+      'windows_sdk_version': '<!(<(python) -c "import os; print os.getenv(\'WindowsSDKVersion\');")',
+	  'vc_tools_install_dir': '<!(<(python) -c "import os; print os.getenv(\'VCToolsInstallDir\');")',
+	  'windows_path_dirs_x86': [
+		'<(vc_tools_install_dir)/bin/Hostx64/x86',
         '<(msvc_dir)/common7/IDE',
-        '<(msvc_dir)/redist/x86/Microsoft.VC<(msvc_version).CRT',
-        '<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_version).DebugCRT',
-        '<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT',
-        '<(platformsdk_dir)/bin/x86',
-        '<(platformsdk_dir)/bin/x86/ucrt',
+        '<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT',
+        '<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_redist_dir_version).DebugCRT',
+        '<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT',
+        '<(platformsdk_dir)/bin/<(windows_sdk_version)/x86',
+        '<(platformsdk_dir)/bin/<(windows_sdk_version)/x86/ucrt',
       ],
       'windows_path_dirs_x64': [
-        '<(msvc_dir)/vc/bin/amd64',
+        '<(vc_tools_install_dir)/bin/Hostx64/x64',
         '<(msvc_dir)/common7/IDE',
-        '<(msvc_dir)/redist/x64/Microsoft.VC<(msvc_version).CRT',
+        '<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT',
         # Yes, the x64 paths include the x86 paths. This is because some tools
         # might be built with the default configuration (x86) and still need to
         # run under an x64 build.
-        '<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_version).DebugCRT',
-        '<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_version).CRT',
-        '<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_version).DebugCRT',
-        '<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_version).CRT',
-        '<(platformsdk_dir)/bin/x64',
-        '<(platformsdk_dir)/bin/x64/ucrt',
+        '<(msvc_redist_dir)/Debug_NonRedist/x86/Microsoft.VC<(msvc_redist_dir_version).DebugCRT',
+        '<(msvc_redist_dir)/x86/Microsoft.VC<(msvc_redist_dir_version).CRT',
+        '<(msvc_redist_dir)/Debug_NonRedist/x64/Microsoft.VC<(msvc_redist_dir_version).DebugCRT',
+        '<(msvc_redist_dir)/x64/Microsoft.VC<(msvc_redist_dir_version).CRT',
+        '<(platformsdk_dir)/bin/<(windows_sdk_version)/x64',
+        '<(platformsdk_dir)/bin/<(windows_sdk_version)/x64/ucrt',
       ],
     },
     # The include dirs are the same for both architectures.
@@ -53,12 +54,12 @@
     ],
 
     'library_dirs_x86': [
-      '<(msvc_dir)/vc/lib',
+      '<(vc_tools_install_dir)/lib/x86',
       '<(platformsdk_dir)/lib/<(windows_sdk_version)/ucrt/x86',
       '<(platformsdk_dir)/lib/<(windows_sdk_version)/um/x86',
     ],
     'library_dirs_x64': [
-      '<(msvc_dir)/vc/lib/amd64',
+      '<(vc_tools_install_dir)/lib/x64',
       '<(platformsdk_dir)/lib/<(windows_sdk_version)/ucrt/x64',
       '<(platformsdk_dir)/lib/<(windows_sdk_version)/um/x64',
     ],
@@ -67,8 +68,12 @@
     'windows_path_dirs_x64%': '<(windows_path_dirs_x64)',
     'msvc_dir': '<!(<(python) -c "import os; print os.getenv(\'VSINSTALLDIR\') or os.path.realpath(\'<(third_party_dir)/msvc/files\')")',
     'platformsdk_dir': '<!(<(python) -c "import os; print os.getenv(\'WindowsSdkDir\') or os.path.realpath(\'<(third_party_dir)/windows_sdk_10/files\')")',
-    'msvc_redist_dir': '<(msvc_dir)/vc/redist',
+    'msvc_redist_dir': '<!(<(python) -c "import os; print os.getenv(\'VCToolsRedistDir\');")',
     'msvc_version': '<!(<(python) -c "import os; print (os.getenv(\'VisualStudioVersion\') or \'14.0\').replace(\'.\', \'\')")',
+    # In Visual Studio (Community) 2017, VisualStudioVersion is 15.0, but the redist path contains "141" and dll name "140".
+	# In Visual Studio (Community) 2019, VisualStudioVersion is 16.0, but the redist path contains "142" and dll name "140". 
+	'msvc_redist_dir_version': '<!(<(python) -c "print 141 if (<(msvc_version)==150) else 142 if (<(msvc_version)==160) else <(msvc_version);")',
+	'msvc_redist_dll_version': '<!(<(python) -c "print 140 if (<(msvc_version)==150 or <(msvc_version)==160) else <(msvc_version);")',
   },
   'target_defaults': {
     'conditions': [
