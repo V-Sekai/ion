@@ -165,11 +165,11 @@ def _AsyncSubprocess(stdout_lock, test_target, command_args, is_verbose):
       if retcode:
         sys.stdout.write('{red}FAILED: '.format(red=colorama.Fore.RED))
       _PrintTestHeader(test_target)
-      print >>sys.stdout, '{reset}{stdout}'.format(
-          reset=colorama.Fore.RESET, stdout=stdout)
+      print(sys.stdout, '{reset}{stdout}'.format(
+          reset=colorama.Fore.RESET, stdout=stdout))
     else:
-      print '{green}PASSED: {reset}{t}'.format(
-          t=test_target, green=colorama.Fore.GREEN, reset=colorama.Fore.RESET)
+      print('{green}PASSED: {reset}{t}'.format(
+          t=test_target, green=colorama.Fore.GREEN, reset=colorama.Fore.RESET))
     stdout_lock.release()
   except KeyboardInterrupt:
     return -1
@@ -200,7 +200,7 @@ def _PrintTestHeader(test_target_name):
   Args:
     test_target_name: The name of the test.
   """
-  print '=' * 30, test_target_name, '=' * 30
+  print('=' * 30, test_target_name, '=' * 30)
 
 
 # pylint: disable=invalid-name
@@ -744,7 +744,7 @@ class TargetBuilder(object):
     gyp_env = self.GypEnv()
     gyp_cwd = self.GypCWD()
 
-    print 'gyp {0}'.format(' '.join(gyp_args))
+    print('gyp {0}'.format(' '.join(gyp_args)))
 
     with WorkingDirectory(gyp_cwd):
       with EnvironmentVariables(gyp_env):
@@ -779,7 +779,7 @@ class TargetBuilder(object):
 
     # Invoke build tool
     call_list = [build_binary_path] + build_args
-    print ' '.join(call_list)
+    print(' '.join(call_list))
     return subprocess.call(call_list, cwd=build_cwd, env=build_env)
 
   def RunTest(self, configuration, test_target, test_args):
@@ -884,7 +884,7 @@ class TargetBuilder(object):
         if retcode:
           # Do not change the string below! It is used in test result filtering
           # by pulse.
-          print 'TEST RETURNED NON-ZERO:', test_target
+          print('TEST RETURNED NON-ZERO:', test_target)
           return retcode
 
     # Wait for everything to finish.
@@ -899,7 +899,7 @@ class TargetBuilder(object):
       if retcode:
         # Do not change the string below! It is used in test result filtering
         # by pulse.
-        print 'TEST RETURNED NON-ZERO:', test_target
+        print('TEST RETURNED NON-ZERO:', test_target)
       retcode_cumulative |= retcode
 
     return retcode_cumulative
@@ -1006,7 +1006,7 @@ class ASMJSBuilder(TargetBuilder):
     if test_args:
       command_args.append('--')
       command_args.extend(test_args)
-    print ' '.join(command_args)
+    print(' '.join(command_args))
     async_result = self.pool.apply_async(
         _AsyncSubprocess, args=(self.stdout_lock, test_target, command_args,
                                 self.cmdflags.verbose))
@@ -1060,7 +1060,7 @@ class PNACLBuilder(NACLBuilder):
   def RunTest(self, unused_configuration, test_target, unused_test_args):
     _PrintTestHeader(test_target)
     # No way to run pnacl binaries (yet).
-    print 'No way to run test, skipping', test_target
+    print('No way to run test, skipping', test_target)
     return 0
 
 
@@ -1110,7 +1110,7 @@ class AndroidBuilderNoEmu(AndroidBuilder):
   def RunTest(self, unused_configuration, test_target, unused_test_args):
     _PrintTestHeader(test_target)
     # No way to run these binaries for this android (no emulator support).
-    print 'No way to run test, skipping', test_target
+    print('No way to run test, skipping', test_target)
     return 0
 
 
@@ -1441,13 +1441,13 @@ class WindowsBuilderMSVS(TargetBuilder):
       unused_configuration: The gyp configuration (unused).
       filename: gyp filename of the target of interested.
     """
-    print 'Open Visual Studio to build:'
-    print
+    print('Open Visual Studio to build:')
+    print()
 
     # Point to the .sln file that we just generated.
     project_name, _ = os.path.splitext(filename)
-    print os.path.join(GYP_PROJECTS_DIR,
-                       '{p}_{o}.sln'.format(p=project_name, o=self.TARGET_OS))
+    print(os.path.join(GYP_PROJECTS_DIR,
+                       '{p}_{o}.sln'.format(p=project_name, o=self.TARGET_OS)))
 
   def CleanGeneratorDirectory(self):
     """Delete the generator files directory (MSVS projects)."""
@@ -2078,8 +2078,8 @@ def ExitWithError(message):
 
 
 def PrintStatus(message):
-  print '{green}INFO: {reset}{m}'.format(
-      m=message, green=colorama.Fore.GREEN, reset=colorama.Fore.RESET)
+  print('{green}INFO: {reset}{m}'.format(
+      m=message, green=colorama.Fore.GREEN, reset=colorama.Fore.RESET))
 
 
 def main(argv):
