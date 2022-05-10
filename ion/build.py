@@ -648,10 +648,10 @@ class TargetBuilder(object):
 
     gyp_generator = self.GypGenerator()
 
-    for k, v in self.GypDefines().iteritems():
+    for k, v in self.GypDefines().items():
       gyp_args['-D'].append('{k}={v}'.format(k=k, v=v))
 
-    for k, v in self.GypVariables().iteritems():
+    for k, v in self.GypVariables().items():
       gyp_args['-D'].append('{k}={v}'.format(k=k, v=v))
 
 
@@ -692,8 +692,8 @@ class TargetBuilder(object):
         return [arg, value]
 
     command_line = []
-    for k, v in flags.iteritems():
-      if isinstance(v, basestring):
+    for k, v in flags.items():
+      if isinstance(v, str):
         # Just add the key and value.
         command_line += FormatArgAndValue(k, v)
       elif v is None:
@@ -2115,7 +2115,7 @@ def main(argv):
   elif not args.generator:  # User wants to use the default generator.
     # We didn't have a builder for this OS+generator combination.  Look for any
     # builders for this OS and take the first one we find.
-    for key in BUILDER_REGISTRY.iterkeys():
+    for key in BUILDER_REGISTRY.keys():
       if key[0] == args.os:
         builder = BUILDER_REGISTRY[key](state)
         break
