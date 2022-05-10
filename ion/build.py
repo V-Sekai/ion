@@ -2072,8 +2072,8 @@ def GetHostOS():
 
 
 def ExitWithError(message):
-  print >> sys.stdout, '{1}ERROR:{2} {0}'.format(
-      message, colorama.Fore.RED, colorama.Fore.RESET)
+  print(sys.stdout, '{1}ERROR:{2} {0}'.format(
+      message, colorama.Fore.RED, colorama.Fore.RESET))
   sys.exit(1)
 
 
