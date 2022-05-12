@@ -72,7 +72,7 @@ ZipAssetManager.
 
 import array
 import os
-import StringIO
+from io import BytesIO
 import sys
 import textwrap
 import xml.etree.ElementTree as ET
@@ -148,8 +148,9 @@ def BuildManifest(asset_file, search_paths):
   if not os.path.exists(asset_file):
     raise IOError('Could not find asset file "%s"' % asset_file)
 
+  f = open(asset_file, "rb")
   # Load the xml.
-  root = ET.parse(asset_file).getroot()
+  root = ET.parse(f).getroot()
   if root.tag != 'IAD':
     raise InvalidAssetSyntaxError('Root tag should be "IAD" not "%s"' %
                                   root.tag)
@@ -204,7 +205,8 @@ def BuildAssetZip(asset_file, search_paths):
     raise InvalidAssetSyntaxError(
         '"%s" does not contain any asset definitions' % asset_file)
 
-  in_memory_zip = StringIO.StringIO()
+  f = open(asset_file, 'wb')
+  in_memory_zip = f
   zip_file = zipfile.ZipFile(in_memory_zip, 'w',
                              compression=zipfile.ZIP_DEFLATED)
 
@@ -212,7 +214,7 @@ def BuildAssetZip(asset_file, search_paths):
   # built across distributed machines.
   dummy_date = (2017, 1, 1, 1, 0, 0)
   # Keep track of what the absolute path is for each file in the zip.
-  manifest_file = StringIO.StringIO()
+  manifest_file = open(manifest, 'wb')
   # Write each file to the zip using the manifest name.
   original_size = 0
   for (local_name, zip_name) in manifest:
