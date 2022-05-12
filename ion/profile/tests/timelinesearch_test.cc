@@ -25,7 +25,7 @@ limitations under the License.
 #include "ion/profile/timelinesearch.h"
 #include "absl/memory/memory.h"
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
-#include "third_party/jsoncpp/include/json/value.h"
+#include "json/value.h"
 
 static std::unique_ptr<Timeline> CreateTimelineWithSingleScope(
     const char* name) {

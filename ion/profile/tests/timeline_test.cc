@@ -22,7 +22,7 @@ limitations under the License.
 #include "ion/profile/timelineevent.h"
 #include "ion/profile/timelinenode.h"
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
-#include "third_party/jsoncpp/include/json/value.h"
+#include "json/value.h"
 
 TimelineEvent* AddTimelineEvent(const uint32 start, const uint32 end,
                                 const char* name, TimelineNode* parent) {

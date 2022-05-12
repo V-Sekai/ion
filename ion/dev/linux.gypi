@@ -20,9 +20,12 @@
     'compiler_dir': '/usr',
   },
   'make_global_settings' : [
-    ['CC', '<(compiler_dir)/bin/clang'],
-    ['CXX', '<(compiler_dir)/bin/clang++'],
-    ['LINK', '<(compiler_dir)/bin/clang++'],
+    #['CC', '<(compiler_dir)/bin/clang'],
+    #['CXX', '<(compiler_dir)/bin/clang++'],
+    #['LINK', '<(compiler_dir)/bin/clang++'],
+    ['CC', '<(compiler_dir)/bin/gcc'],
+    ['CXX', '<(compiler_dir)/bin/g++'],
+    ['LINK', '<(compiler_dir)/bin/g++'],
   ],
   'target_defaults': {
     'library_dirs': [

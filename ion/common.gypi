@@ -55,6 +55,7 @@
     'include_dirs' : [
       '<(ion_dir)/port/override',
       '<(root_dir)',
+      '<(root_dir)/third_party/jsoncpp/include',  # Use JSONCPP in third_party.
     ],
     'defines' : [
       'ION_GYP=1',
@@ -333,7 +334,7 @@
         'link_settings': {
           'libraries': [
             '-lpthread',
-            '-lpthread_nonshared',
+            # '-lpthread_nonshared',
             '-lm',
             '-lc',
             '-lc_nonshared',
@@ -346,9 +347,9 @@
           '-fPIC',
         ],
         'cflags_cc': [
-          '-Wall',
-          '-Werror',  # Treat warnings as errors...
-          '-Wno-error=unknown-warning-option', # Except the ones we don't know about.
+          #'-Wall',
+          #'-Werror',  # Treat warnings as errors...
+          #'-Wno-error=unknown-warning-option', # Except the ones we don't know about.
           '-Wno-deprecated',
           '-Wno-unknown-pragmas',
           '-fno-exceptions',

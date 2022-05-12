@@ -22,7 +22,7 @@ limitations under the License.
 
 #include "base/integral_types.h"
 #include "ion/profile/timelineevent.h"
-#include "third_party/jsoncpp/include/json/value.h"
+#include "json/value.h"
 
 // This node type represents a custom scope event from a WTF trace in a
 // timeline.
