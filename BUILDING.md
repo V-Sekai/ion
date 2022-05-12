@@ -5,6 +5,7 @@ Ion depends on several submodules, you will need to run
 
     git submodule init
     git submodule update
+    sudo apt install tinyxml2-devel libstb-devel libjpeg-devel libminizip-devel libjsoncpp-devel libfreetype2-devel libfreetype-dev
 
 to download and sync them.
 
