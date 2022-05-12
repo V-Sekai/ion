@@ -24,6 +24,7 @@ limitations under the License.
 #include <algorithm>
 #include <cmath>
 #include <type_traits>
+#include <limits>
 
 #include "base/integral_types.h"
 
